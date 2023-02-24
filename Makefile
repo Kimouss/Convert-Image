@@ -65,8 +65,8 @@ cache:
 mysql: ## Reset the database and load fixtures
 	$(SYMFONY) doctrine:database:drop --if-exists --force
 	$(SYMFONY) doctrine:database:create --if-not-exists
-	#$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration
-	$(SYMFONY) doctrine:schema:update --force
+	$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration
+#	$(SYMFONY) doctrine:schema:update --force
 	$(SYMFONY) doctrine:schema:validate
 	@echo '\033[1;32mDatabase up\033[0m';
 

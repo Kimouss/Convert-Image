@@ -25,6 +25,9 @@ class Image
     #[ORM\Column(type: 'datetime')]
     private \DateTime $updatedAt;
 
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    private ?Book $book = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -66,6 +69,18 @@ class Image
     public function setUpdatedAt(\DateTime $updatedAt): Image
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getBook(): ?Book
+    {
+        return $this->book;
+    }
+
+    public function setBook(?Book $book): self
+    {
+        $this->book = $book;
 
         return $this;
     }

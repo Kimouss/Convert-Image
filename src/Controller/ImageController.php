@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Image;
+use App\Form\ImagesType;
 use App\Form\ImageType;
 use App\Repository\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -25,7 +26,8 @@ class ImageController extends AbstractController
     public function new(Request $request, ImageRepository $imageRepository): Response
     {
         $image = new Image();
-        $form = $this->createForm(ImageType::class, $image);
+//        $form = $this->createForm(ImageType::class, $image);
+        $form = $this->createForm(ImagesType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -34,7 +36,7 @@ class ImageController extends AbstractController
             return $this->redirectToRoute('app_image_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('image/new.html.twig', [
+        return $this->render('image/new.html.twig', [
             'image' => $image,
             'form' => $form,
         ]);
